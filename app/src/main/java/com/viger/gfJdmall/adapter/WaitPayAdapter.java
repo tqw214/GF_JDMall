@@ -20,14 +20,14 @@ import com.viger.gfJdmall.cons.NetworkConst;
 
 public class WaitPayAdapter extends JdBaseAdapter<OrderBean> {
 
-    private OnDeleteOrderListener mListener;
+    private OnOrderPayListener mListener;
 
-    public void setOnDeleteOrderListener(OnDeleteOrderListener listener) {
+    public void setOnOrderPayListener(OnOrderPayListener listener) {
         this.mListener = listener;
     }
 
-    public interface OnDeleteOrderListener {
-        void onDelete(int position);
+    public interface OnOrderPayListener {
+        void onPay(int position);
     }
 
     public WaitPayAdapter(Context ctx) {
@@ -45,6 +45,12 @@ public class WaitPayAdapter extends JdBaseAdapter<OrderBean> {
             holder.p_container_ll = (LinearLayout) view.findViewById(R.id.p_container_ll);
             holder.price_tv = (TextView) view.findViewById(R.id.price_tv);
             holder.do_btn = (Button) view.findViewById(R.id.do_btn);
+            holder.do_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mListener.onPay(i);
+                }
+            });
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
@@ -53,12 +59,6 @@ public class WaitPayAdapter extends JdBaseAdapter<OrderBean> {
         holder.order_no_tv.setText("订单号:"+rowsBean.getOrderNum());
         holder.order_state_tv.setText(showOrderStatus(Integer.valueOf(rowsBean.getStatus())));
         holder.price_tv.setText("¥:"+rowsBean.getTotalPrice());
-        holder.do_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onDelete(i);
-            }
-        });
         int count = Math.min(holder.p_container_ll.getChildCount(), rowsBean.getItems().size());
         for (int m=0;m<holder.p_container_ll.getChildCount();m++) {
             holder.p_container_ll.getChildAt(m).setVisibility(View.INVISIBLE);
