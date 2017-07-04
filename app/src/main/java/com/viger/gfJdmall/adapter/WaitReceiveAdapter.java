@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.loopj.android.image.SmartImageView;
 import com.viger.gfJdmall.R;
 import com.viger.gfJdmall.bean.OrderBean;
@@ -15,19 +16,19 @@ import com.viger.gfJdmall.cons.NetworkConst;
  * Created by Administrator on 2017/5/12.
  */
 
-public class WaitPayAdapter extends JdBaseAdapter<OrderBean> {
+public class WaitReceiveAdapter extends JdBaseAdapter<OrderBean> {
 
-    private OnOrderPayListener mListener;
+    private OnOrderReceiveListener mListener;
 
-    public void setOnOrderPayListener(OnOrderPayListener listener) {
+    public void setOnOrderReceiveListener(OnOrderReceiveListener listener) {
         this.mListener = listener;
     }
 
-    public interface OnOrderPayListener {
-        void onPay(int position);
+    public interface OnOrderReceiveListener {
+        void onReceive(int position);
     }
 
-    public WaitPayAdapter(Context ctx) {
+    public WaitReceiveAdapter(Context ctx) {
         super(ctx);
     }
 
@@ -45,7 +46,7 @@ public class WaitPayAdapter extends JdBaseAdapter<OrderBean> {
             holder.do_btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mListener.onPay(i);
+                    mListener.onReceive(i);
                 }
             });
             view.setTag(holder);
@@ -66,7 +67,7 @@ public class WaitPayAdapter extends JdBaseAdapter<OrderBean> {
             SmartImageView image = (SmartImageView) holder.p_container_ll.getChildAt(j);
             image.setImageUrl(NetworkConst.BASE_URL + rowsBean.getItems().get(j));
         }
-        holder.do_btn.setText("去支付");
+        holder.do_btn.setText("收货");
         return view;
     }
 

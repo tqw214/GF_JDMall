@@ -29,7 +29,22 @@ public class OrderController extends BaseController {
             case IdiyMessage.WAIT_PAY_ACTION:
                 mListener.onModeChange(action, getOrderByStatus((Integer)obj[0],(Long)obj[1]));
                 break;
+            case IdiyMessage.WAIT_RECEIVE_ACTION:
+                mListener.onModeChange(action, getOrderByStatus((Integer)obj[0],(Long)obj[1]));
+                break;
+            case IdiyMessage.CONFIRM_ORDER:
+                mListener.onModeChange(action, confirmOrder((Long)obj[0],obj[1].toString()));
+                break;
         }
+    }
+
+    private RResult confirmOrder(long userId, String oid) {
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("userId",userId+"");
+        params.put("oid", oid);
+        String json = NetworkUtil.doPost(NetworkConst.CONFIRM_ORDER, params);
+        RResult result = JSON.parseObject(json, RResult.class);
+        return result;
     }
 
     private List<OrderBean> getOrderByStatus(int status, long userId) {

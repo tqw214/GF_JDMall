@@ -109,8 +109,7 @@
             android:focusable="false"
             android:textStyle="bold"
             android:textColor="#F44A4A"
-            android:textSize="16sp"
-			android:text="去支付"/>
+            android:textSize="16sp" />
     </RelativeLayout>
 
 </LinearLayout>

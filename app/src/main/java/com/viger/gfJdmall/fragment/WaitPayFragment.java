@@ -15,6 +15,8 @@ import com.viger.gfJdmall.bean.OrderBean;
 import com.viger.gfJdmall.cons.IdiyMessage;
 import com.viger.gfJdmall.controller.OrderController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import me.maxwin.view.XListView;
@@ -32,6 +34,19 @@ public class WaitPayFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		mView = inflater.inflate(R.layout.fragment_wait_pay, container,false);
 		wait_pay_lv = (XListView) mView.findViewById(R.id.wait_pay_lv);
+		wait_pay_lv.setPullRefreshEnable(true);
+		wait_pay_lv.setPullLoadEnable(false);
+		wait_pay_lv.setXListViewListener(new XListView.IXListViewListener() {
+			@Override
+			public void onRefresh() {
+				mController.sendAsyncMessage(IdiyMessage.WAIT_PAY_ACTION, 0, getUserId());
+			}
+
+			@Override
+			public void onLoadMore() {
+
+			}
+		});
 		return mView;
 	}
 	
@@ -39,9 +54,9 @@ public class WaitPayFragment extends BaseFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		mAdapter = new WaitPayAdapter(getActivity());
-		mAdapter.setOnDeleteOrderListener(new WaitPayAdapter.OnDeleteOrderListener() {
+		mAdapter.setOnOrderPayListener(new WaitPayAdapter.OnOrderPayListener() {
 			@Override
-			public void onDelete(int position) {
+			public void onPay(int position) {
 				Toast.makeText(getActivity(), position+"", Toast.LENGTH_SHORT).show();
 			}
 		});
@@ -61,6 +76,8 @@ public class WaitPayFragment extends BaseFragment {
 		mController.setModeChangeListener(this);
 	}
 
+
+
 	@Override
 	protected void myHandleMessage(Message msg) {
 		switch (msg.what) {
@@ -76,6 +93,8 @@ public class WaitPayFragment extends BaseFragment {
 	private void handleGetOrderByWaitPay(List<OrderBean> data) {
 		if(data != null && data.size()>0) {
 			mAdapter.setDatas(data);
+			wait_pay_lv.setRefreshTime(getCurrentTime());
+			wait_pay_lv.stopRefresh();
 		}
 	}
 }
