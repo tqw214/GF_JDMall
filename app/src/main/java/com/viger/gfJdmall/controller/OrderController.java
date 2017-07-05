@@ -35,6 +35,9 @@ public class OrderController extends BaseController {
             case IdiyMessage.CONFIRM_ORDER:
                 mListener.onModeChange(action, confirmOrder((Long)obj[0],obj[1].toString()));
                 break;
+            case IdiyMessage.COMPLETE_ORDER:
+                mListener.onModeChange(action, getOrderByStatus((Integer)obj[0],(Long)obj[1]));
+                break;
         }
     }
 
