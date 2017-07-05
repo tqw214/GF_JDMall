@@ -52,6 +52,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:textColor="#F000" />
+            <TextView
+                android:id="@+id/order_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#F000" />
 
         </LinearLayout>
         <LinearLayout
@@ -62,13 +68,12 @@
             android:orientation="horizontal" >
 
             <Button
-                android:visibility="gone"
-                android:id="@+id/cancal_btn"
+                android:id="@+id/send_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:background="@drawable/search_et_shap"
-                android:text="取 消 " />
+                android:text="商家发货(模拟) " />
 
             <Button
                 android:id="@+id/sure_btn"

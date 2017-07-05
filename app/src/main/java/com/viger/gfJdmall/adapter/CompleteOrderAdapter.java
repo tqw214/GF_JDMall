@@ -32,7 +32,7 @@ public class CompleteOrderAdapter extends JdBaseAdapter<OrderBean> {
             holder.order_state_tv = (TextView) view.findViewById(R.id.order_state_tv);
             holder.p_container_ll = (LinearLayout) view.findViewById(R.id.p_container_ll);
             holder.price_tv = (TextView) view.findViewById(R.id.price_tv);
-            //holder.do_btn = (Button) view.findViewById(R.id.do_btn);
+            holder.do_btn = (Button) view.findViewById(R.id.do_btn);
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
@@ -51,6 +51,7 @@ public class CompleteOrderAdapter extends JdBaseAdapter<OrderBean> {
             SmartImageView image = (SmartImageView) holder.p_container_ll.getChildAt(j);
             image.setImageUrl(NetworkConst.BASE_URL + rowsBean.getItems().get(j));
         }
+        holder.do_btn.setVisibility(View.INVISIBLE);
         return view;
     }
 
@@ -59,6 +60,7 @@ public class CompleteOrderAdapter extends JdBaseAdapter<OrderBean> {
         TextView order_state_tv;
         LinearLayout p_container_ll;
         TextView price_tv;
+        Button do_btn;
     }
 
     private String showOrderStatus(int status) {

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.viger.gfJdmall.R;
 import com.viger.gfJdmall.adapter.CompleteOrderAdapter;
 import com.viger.gfJdmall.adapter.WaitReceiveAdapter;
+import com.viger.gfJdmall.application.MyApplication;
 import com.viger.gfJdmall.bean.OrderBean;
 import com.viger.gfJdmall.bean.RResult;
 import com.viger.gfJdmall.cons.IdiyMessage;
@@ -30,7 +31,7 @@ public class CompletedOrderFragment extends BaseFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		mView = inflater.inflate(R.layout.fragment_completed_order, container,false);
-		complete_lv = (XListView) mView.findViewById(R.id.comment_lv);
+		complete_lv = (XListView) mView.findViewById(R.id.complete_lv);
 		complete_lv.setPullRefreshEnable(true);
 		complete_lv.setPullLoadEnable(false);
 		complete_lv.setXListViewListener(new XListView.IXListViewListener() {
@@ -45,6 +46,10 @@ public class CompletedOrderFragment extends BaseFragment {
 			}
 		});
 		return mView;
+	}
+
+	protected long getUserId() {
+		return ((MyApplication)getActivity().getApplication()).getUserInfo().getId();
 	}
 	
 	@Override
@@ -75,9 +80,12 @@ public class CompletedOrderFragment extends BaseFragment {
 		}
 	}
 
-	private void handleCompleteOrder(List<OrderBean> result) {
-		if(result != null && result.size()>0) {
-			mAdapter.setDatas(result);
+	private void handleCompleteOrder(List<OrderBean> data) {
+		if(data != null) {
+			this.mDatas = data;
+			mAdapter.setDatas(data);
+			complete_lv.setRefreshTime(getCurrentTime());
 		}
+		complete_lv.stopRefresh();
 	}
 }

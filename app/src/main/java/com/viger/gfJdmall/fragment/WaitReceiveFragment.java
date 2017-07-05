@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.viger.gfJdmall.R;
 import com.viger.gfJdmall.adapter.WaitReceiveAdapter;
+import com.viger.gfJdmall.application.MyApplication;
 import com.viger.gfJdmall.bean.OrderBean;
 import com.viger.gfJdmall.bean.RResult;
 import com.viger.gfJdmall.cons.IdiyMessage;
@@ -45,6 +46,10 @@ public class WaitReceiveFragment extends BaseFragment {
 			}
 		});
 		return mView;
+	}
+
+	protected long getUserId() {
+		return ((MyApplication)getActivity().getApplication()).getUserInfo().getId();
 	}
 	
 	@Override
@@ -98,7 +103,7 @@ public class WaitReceiveFragment extends BaseFragment {
 	}
 
 	private void handleGetOrderByWaitReceive(List<OrderBean> data) {
-		if(data != null && data.size()>0) {
+		if(data != null) {
 			this.mDatas = data;
 			mAdapter.setDatas(data);
 			wait_pay_lv.setRefreshTime(getCurrentTime());

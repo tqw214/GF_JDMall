@@ -21,9 +21,9 @@ public abstract class BaseFragment extends Fragment implements IModeChangeListen
         //default empty
     }
 
-    protected long getUserId() {
-        return ((MyApplication)getActivity().getApplication()).getUserInfo().getId();
-    }
+//    protected long getUserId() {
+//        return ((MyApplication)getActivity().getApplication()).getUserInfo().getId();
+//    }
 
     @Override
     public void onModeChange(int action, Object... data) {
