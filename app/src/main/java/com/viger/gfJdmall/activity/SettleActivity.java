@@ -23,6 +23,7 @@ import com.viger.gfJdmall.cons.NetworkConst;
 import com.viger.gfJdmall.controller.ShopCarController;
 import com.viger.gfJdmall.listener.IModeChangeListener;
 import com.viger.gfJdmall.ui.pop.AddOrderDialog;
+import com.viger.gfJdmall.ui.pop.PayWhenGetDialog;
 import com.viger.gfJdmall.utils.NetworkUtil;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class SettleActivity extends BaseActivity implements IModeChangeListener{
     private TextView pay_money_tv;
     private Button pay_online_tv,pay_whenget_tv;
     private AdressBean mAdressBean;
+    private AddOrderBean bean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,16 +123,16 @@ public class SettleActivity extends BaseActivity implements IModeChangeListener{
             tip("请选择支付方式");
             return;
         }
-        if(pay_online_tv.isSelected()) {
-            tip("在线支付");
-        }else {
-            tip("货到付款");
-        }
+//        if(pay_online_tv.isSelected()) {
+//            tip("在线支付");
+//        }else {
+//            tip("货到付款");
+//        }
         if(mAdressBean == null) {
             tip("请选择或添加收货地址");
             return;
         }
-        AddOrderBean bean = new AddOrderBean();
+        bean = new AddOrderBean();
         bean.setAddrId(mAdressBean.getId());
         bean.setPayWay(pay_online_tv.isSelected()? 0:1);
         bean.setUserId(getUserId());
@@ -210,8 +212,17 @@ public class SettleActivity extends BaseActivity implements IModeChangeListener{
                 int errorType = data.getErrorType();
                 if(errorType == 0) {
                     tip("下单成功");
-                    AddOrderDialog addOrderDialog = new AddOrderDialog(this, data);
-                    addOrderDialog.show();
+
+                    int payWay = bean.getPayWay();
+                    if(payWay == 0) {
+                        //在线支付
+                        PayWhenGetDialog pDialog = new PayWhenGetDialog(this, data);
+                        pDialog.show();
+                    }else {
+                        //货到付款
+                        AddOrderDialog addOrderDialog = new AddOrderDialog(this, data);
+                        addOrderDialog.show();
+                    }
                 }
                 if(errorType == 1) {
                     tip("无库存");

@@ -72,8 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:background="@drawable/search_et_shap"
-                android:text="商家发货(模拟) " />
+                android:background="@drawable/search_et_shap" />
 
             <Button
                 android:id="@+id/sure_btn"
@@ -81,8 +80,7 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp"
                 android:background="@drawable/search_et_shap"
-                android:layout_marginLeft="20dp"
-                android:text="确 认" />
+                android:layout_marginLeft="20dp" />
         </LinearLayout>
     </RelativeLayout>
 

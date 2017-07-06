@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.alibaba.fastjson.JSON;
 import com.viger.gfJdmall.bean.AddOrderResultBean;
 import com.viger.gfJdmall.bean.AdressBean;
+import com.viger.gfJdmall.bean.PayInfoBean;
 import com.viger.gfJdmall.bean.RResult;
 import com.viger.gfJdmall.bean.ReceviceAdressBean;
 import com.viger.gfJdmall.bean.ShopCarBean;
@@ -61,7 +62,22 @@ public class ShopCarController extends BaseController {
             case IdiyMessage.ADD_ORDER:
                 mListener.onModeChange(action, addOrder((String) obj[0]));
                 break;
+            case IdiyMessage.GET_PAY_INFO:
+                mListener.onModeChange(action, getPayInfo((Long) obj[0], obj[1].toString()));
+                break;
         }
+    }
+
+    private PayInfoBean getPayInfo(long userId, String tn) {
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("userId", userId+"");
+        params.put("tn", tn);
+        String resultStr = NetworkUtil.doPost(NetworkConst.GET_PAY_INFO, params);
+        RResult res = JSON.parseObject(resultStr, RResult.class);
+        if(res.isSuccess()) {
+            return JSON.parseObject(res.getResult(), PayInfoBean.class);
+        }
+        return null;
     }
 
     private RResult addOrder(String json) {

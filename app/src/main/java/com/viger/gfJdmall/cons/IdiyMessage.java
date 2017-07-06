@@ -37,5 +37,6 @@ public class IdiyMessage {
     public static final int WAIT_RECEIVE_ACTION = 28;
     public static final int CONFIRM_ORDER = 29;
     public static final int COMPLETE_ORDER = 30;
+    public static final int GET_PAY_INFO = 31;
 
 }

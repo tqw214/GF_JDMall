@@ -1,10 +1,12 @@
 package com.viger.gfJdmall.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2017/6/26.
  */
 
-public class AddOrderResultBean {
+public class AddOrderResultBean implements Serializable{
 
     private int errorType;
     private String buyTime;
