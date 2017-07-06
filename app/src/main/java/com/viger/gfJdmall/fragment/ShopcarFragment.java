@@ -95,9 +95,8 @@ public class ShopcarFragment extends BaseFragment {
 		initController();
 	}
 
-	public long getUserId() {
-		MyApplication application = (MyApplication) getActivity().getApplication();
-		return application.getUserInfo().getId();
+	protected long getUserId() {
+		return ((MyApplication)getActivity().getApplication()).getUserInfo().getId();
 	}
 
 	@Override

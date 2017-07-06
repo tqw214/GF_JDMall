@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.viger.gfJdmall.R;
+import com.viger.gfJdmall.application.MyApplication;
 import com.viger.gfJdmall.bean.AddOrderResultBean;
 import com.viger.gfJdmall.bean.PayInfoBean;
 import com.viger.gfJdmall.cons.IdiyMessage;
@@ -44,6 +45,9 @@ public class AlipayActivity extends BaseActivity implements IModeChangeListener 
        mController.sendAsyncMessage(IdiyMessage.GET_PAY_INFO, getUserId(), data.getTn());
     }
 
+    protected long getUserId() {
+        return ((MyApplication)getApplication()).getUserInfo().getId();
+    }
 
     @Override
     protected void initView() {
@@ -61,7 +65,7 @@ public class AlipayActivity extends BaseActivity implements IModeChangeListener 
 
     @Override
     public void onModeChange(int action, Object... data) {
-
+        mHandle.obtainMessage(action,data[0]).sendToTarget();
     }
 
     private Handler mHandle = new Handler(){
@@ -70,8 +74,7 @@ public class AlipayActivity extends BaseActivity implements IModeChangeListener 
             super.handleMessage(msg);
             switch (msg.what) {
                 case IdiyMessage.GET_PAY_INFO:
-                    Object[] o = (Object[]) msg.obj;
-                    PayInfoBean bean = (PayInfoBean) o[0];
+                    PayInfoBean bean = (PayInfoBean) msg.obj;
                     handleGetPayInfo(bean);
                     break;
             }
@@ -79,9 +82,9 @@ public class AlipayActivity extends BaseActivity implements IModeChangeListener 
     };
 
     private void handleGetPayInfo(PayInfoBean bean) {
-        pay_price_tv.setText(bean.getTotalPrice()+"");
+        pay_price_tv.setText("¥ "+bean.getTotalPrice()+"");
         order_desc_val_tv.setText(bean.getOinfo());
-        deal_type_val_tv.setText(data.getPayWay());
+        //deal_type_val_tv.setText(data.getPayWay());
         deal_time_val_tv.setText(bean.getPayTime());
         deal_no_val_tv.setText(bean.getTn());
     }

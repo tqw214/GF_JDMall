@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.loopj.android.image.SmartImageView;
 import com.viger.gfJdmall.R;
+import com.viger.gfJdmall.application.MyApplication;
 import com.viger.gfJdmall.bean.AddOrderBean;
 import com.viger.gfJdmall.bean.AddOrderResultBean;
 import com.viger.gfJdmall.bean.AdressBean;
@@ -67,6 +68,10 @@ public class SettleActivity extends BaseActivity implements IModeChangeListener{
         mController = new ShopCarController(this);
         mController.setModeChangeListener(this);
         mController.sendAsyncMessage(IdiyMessage.RECEIVE_DEFAULT_ADDRESS, getUserId(), true);
+    }
+
+    protected long getUserId() {
+        return ((MyApplication)getApplication()).getUserInfo().getId();
     }
 
     private void resetButton(View v) {

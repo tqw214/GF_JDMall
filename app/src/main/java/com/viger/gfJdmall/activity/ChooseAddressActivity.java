@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 
 import com.viger.gfJdmall.R;
 import com.viger.gfJdmall.adapter.ChooseAddressAdapter;
+import com.viger.gfJdmall.application.MyApplication;
 import com.viger.gfJdmall.bean.AdressBean;
 import com.viger.gfJdmall.bean.RResult;
 import com.viger.gfJdmall.cons.IdiyMessage;
@@ -41,6 +42,10 @@ public class ChooseAddressActivity extends BaseActivity implements IModeChangeLi
         mController = new ShopCarController(this);
         mController.setModeChangeListener(this);
         mController.sendAsyncMessage(IdiyMessage.CHOOSE_ADDRESS, getUserId(), false);
+    }
+
+    protected long getUserId() {
+        return ((MyApplication)getApplication()).getUserInfo().getId();
     }
 
     private Handler mHandle = new Handler(){

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.viger.gfJdmall.R;
+import com.viger.gfJdmall.application.MyApplication;
 import com.viger.gfJdmall.bean.AdressBean;
 import com.viger.gfJdmall.bean.RResult;
 import com.viger.gfJdmall.bean.ReceviceAdressBean;
@@ -61,6 +62,10 @@ public class AddReciverActivity extends BaseActivity implements IModeChangeListe
 
     public void goBack(View v) {
 
+    }
+
+    protected long getUserId() {
+        return ((MyApplication)getApplication()).getUserInfo().getId();
     }
 
     public void saveAddress(View v) {

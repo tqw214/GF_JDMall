@@ -19,7 +19,7 @@ public class PayInfoBean {
     private String tn;
     private String pname;
     private String payTime;
-    private String totalPrice;
+    private float totalPrice;
 
     public String getOinfo() {
         return oinfo;
@@ -53,11 +53,11 @@ public class PayInfoBean {
         this.payTime = payTime;
     }
 
-    public String getTotalPrice() {
+    public float getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(String totalPrice) {
+    public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

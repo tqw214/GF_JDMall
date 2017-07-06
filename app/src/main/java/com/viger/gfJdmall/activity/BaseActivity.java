@@ -43,9 +43,9 @@ public abstract class BaseActivity extends FragmentActivity {
         return false;
     }
 
-    protected long getUserId() {
-        return ((MyApplication)getApplication()).getUserInfo().getId();
-    }
+//    protected long getUserId() {
+//        return ((MyApplication)getApplication()).getUserInfo().getId();
+//    }
 
 
 }
