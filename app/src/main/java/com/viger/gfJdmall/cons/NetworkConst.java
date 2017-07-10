@@ -33,4 +33,5 @@ public class NetworkConst {
     public static final String GET_ORDER_BY_STATUS = BASE_URL + "/getOrderByStatus";
     public static final String CONFIRM_ORDER = BASE_URL + "/confirmOrder";
     public static final String GET_PAY_INFO = BASE_URL + "/getPayInfo";
+    public static final String PAY = BASE_URL + "/pay";
 }

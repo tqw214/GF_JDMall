@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.viger.gfJdmall.bean.PayInfoBean;
 import com.viger.gfJdmall.cons.IdiyMessage;
 import com.viger.gfJdmall.controller.ShopCarController;
 import com.viger.gfJdmall.listener.IModeChangeListener;
+import com.viger.gfJdmall.ui.pop.AlipayPopWindow;
 
 /**
  * Created by Administrator on 2017/7/5.
@@ -26,7 +28,9 @@ public class AlipayActivity extends BaseActivity implements IModeChangeListener 
     private TextView deal_type_val_tv;
     private TextView deal_time_val_tv;
     private TextView deal_no_val_tv;
+    private LinearLayout container;
     private AddOrderResultBean data;
+    private  AlipayPopWindow alipayPopWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +60,15 @@ public class AlipayActivity extends BaseActivity implements IModeChangeListener 
         deal_type_val_tv = (TextView) findViewById(R.id.deal_type_val_tv);
         deal_time_val_tv = (TextView) findViewById(R.id.deal_time_val_tv);
         deal_no_val_tv = (TextView) findViewById(R.id.deal_no_val_tv);
-
+        container = (LinearLayout) findViewById(R.id.container);
     }
 
     public void payClick(View view) {
         Toast.makeText(this, "立即付款", Toast.LENGTH_SHORT).show();
+        if(alipayPopWindow == null) {
+            alipayPopWindow = new AlipayPopWindow(this, data.getTn(), getUserId());
+        }
+        alipayPopWindow.onShow(container);
     }
 
     @Override

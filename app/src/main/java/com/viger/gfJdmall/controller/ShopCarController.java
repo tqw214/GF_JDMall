@@ -65,7 +65,21 @@ public class ShopCarController extends BaseController {
             case IdiyMessage.GET_PAY_INFO:
                 mListener.onModeChange(action, getPayInfo((Long) obj[0], obj[1].toString()));
                 break;
+            case IdiyMessage.PAY:
+                mListener.onModeChange(action, pay(obj[0].toString(), obj[1].toString(),obj[2].toString(), obj[3].toString(), (Long)obj[4]));
+                break;
         }
+    }
+
+    private RResult pay(String name,String pwd,String pay_pwd, String tn, long userid) {
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("account", name);
+        params.put("apwd", pwd);
+        params.put("ppwd", pay_pwd);
+        params.put("tn", tn);
+        params.put("userId", userid+"");
+        String json = NetworkUtil.doPost(NetworkConst.DEL_ADDRESS, params);
+        return JSON.parseObject(json, RResult.class);
     }
 
     private PayInfoBean getPayInfo(long userId, String tn) {

@@ -38,5 +38,5 @@ public class IdiyMessage {
     public static final int CONFIRM_ORDER = 29;
     public static final int COMPLETE_ORDER = 30;
     public static final int GET_PAY_INFO = 31;
-
+    public static final int PAY = 32;
 }
