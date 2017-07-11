@@ -29,7 +29,7 @@
         android:listSelector="#0000"
         android:scrollbars="none" />
 
-    <!--
+
     <include
         android:id="@+id/null_view"
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         android:layout_weight="1"
         layout="@layout/null_view"
         android:visibility="gone" />
--->
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

@@ -10,6 +10,7 @@ import com.viger.gfJdmall.cons.IdiyMessage;
 import com.viger.gfJdmall.controller.ProductController;
 import com.viger.gfJdmall.controller.ShopCarController;
 import com.viger.gfJdmall.ui.FlexiListView;
+import com.viger.gfJdmall.ui.LoadingDialog;
 
 import android.app.Application;
 import android.content.Intent;
@@ -36,12 +37,16 @@ public class ShopcarFragment extends BaseFragment {
 	private TextView all_money_tv;
 	private TextView settle_tv;
 	private ShopCarAdapter mAdapter;
+	private LoadingDialog mLoadingDialog;
+	private View mEmpeyView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		mView = inflater.inflate(R.layout.fragment_shopcar, container, false);
 		shopcar_lv = (FlexiListView) mView.findViewById(R.id.shopcar_lv);
+		mEmpeyView = mView.findViewById(R.id.null_view);
+		shopcar_lv.setEmptyView(mEmpeyView);
 		all_cbx = (CheckBox) mView.findViewById(R.id.all_cbx);
 		all_money_tv = (TextView) mView.findViewById(R.id.all_money_tv);
 		settle_tv = (TextView) mView.findViewById(R.id.settle_tv);
@@ -52,6 +57,7 @@ public class ShopcarFragment extends BaseFragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		mLoadingDialog = new LoadingDialog(getActivity());
 		mAdapter = new ShopCarAdapter(getContext());
 		shopcar_lv.setAdapter(mAdapter);
 		shopcar_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,11 +109,15 @@ public class ShopcarFragment extends BaseFragment {
 	protected void initController() {
 		mController = new ShopCarController(getContext());
 		mController.setModeChangeListener(this);
+		mLoadingDialog.show();
 		mController.sendAsyncMessage(IdiyMessage.SHOP_CAR_LIST, getUserId());
 	}
 
 	@Override
 	protected void myHandleMessage(Message msg) {
+		if(mLoadingDialog != null && mLoadingDialog.isShowing()) {
+			mLoadingDialog.dismiss();
+		}
 		if(msg.obj == null) return;
 		Object[] o = (Object[]) msg.obj;
 		switch (msg.what) {
