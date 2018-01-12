@@ -1,11 +1,9 @@
 package com.viger.gfJdmall.activity;
 
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import com.viger.gfJdmall.R;
-import com.viger.gfJdmall.cons.IdiyMessage;
 import com.viger.gfJdmall.fragment.BaseFragment;
 import com.viger.gfJdmall.fragment.CategoryFragment;
 import com.viger.gfJdmall.fragment.HomeFragment;
@@ -13,7 +11,6 @@ import com.viger.gfJdmall.fragment.MyJDFragment;
 import com.viger.gfJdmall.fragment.ShopcarFragment;
 import com.viger.gfJdmall.listener.IBottomBarClickListener;
 import com.viger.gfJdmall.ui.BottomBar;
-
 import java.util.ArrayList;
 import java.util.List;
 

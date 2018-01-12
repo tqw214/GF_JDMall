@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Window;
 import android.widget.Toast;
-
 import com.viger.gfJdmall.application.MyApplication;
 import com.viger.gfJdmall.controller.BaseController;
 

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.viger.gfJdmall.R;
 import com.viger.gfJdmall.application.MyApplication;
 import com.viger.gfJdmall.bean.AddOrderResultBean;

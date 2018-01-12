@@ -6,7 +6,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.AdapterView;
-
 import com.viger.gfJdmall.R;
 import com.viger.gfJdmall.adapter.ChooseAddressAdapter;
 import com.viger.gfJdmall.application.MyApplication;
